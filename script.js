@@ -179,6 +179,7 @@ divs.forEach(element => {
         }
         else if (noPlayer === 1) {
             let draw = false;
+            let intervalId;
             if (!element.classList.contains("disabled")) {
                 element.innerText = "O";
                 if (vol === "on") {
@@ -194,14 +195,20 @@ divs.forEach(element => {
                 if (!check) {
                     if (arr.length < 15) {
                         if (playerX == true) {
-                            document.querySelector(".turn").innerText = "Turn : You";
+                           
                             console.log(computerTurn());
                             let div = computerTurn();
-                            div.innerText = "X";
+
+                            intervalId = setTimeout(() => {
+                                document.querySelector(".turn").innerText = "Turn : You";
+                                div.innerText = "X";  
+                                check = checkWinner(); 
+                            }, 1000);
+                           
                             div.classList.add("disabled");
                             playerX = false;
                             check = checkWinner();
-
+                           
                         }
                     }
                 }
